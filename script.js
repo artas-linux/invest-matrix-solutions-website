@@ -1,5 +1,42 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Construction Popup functionality
+    const constructionPopup = document.getElementById('construction-popup');
+    const closePopupBtn = document.getElementById('close-popup');
+    
+    // Show popup on page load
+    if (constructionPopup) {
+        constructionPopup.style.display = 'flex';
+        
+        // Function to close popup
+        function closePopup() {
+            constructionPopup.classList.add('hidden');
+            constructionPopup.style.display = 'none';
+        }
+        
+        // Close popup when clicking the button
+        if (closePopupBtn) {
+            closePopupBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                closePopup();
+            });
+        }
+        
+        // Close popup when clicking outside the content
+        constructionPopup.addEventListener('click', function(e) {
+            if (e.target === constructionPopup) {
+                closePopup();
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !constructionPopup.classList.contains('hidden')) {
+                closePopup();
+            }
+        });
+    }
+    
     // Mobile Navigation Toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
